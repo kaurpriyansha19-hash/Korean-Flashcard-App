@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean TOPIK Flashcards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-light">
+
+    <div class="container py-5">
+        <div class="text-center mb-4">
+            <h1 class="fw-bold text-primary"><i class="fa-solid fa-language"></i> TOPIK Korean Flashcards</h1>
+            <p class="text-muted">Master essential Korean vocabulary words</p>
+        </div>
+
+        <div class="row justify-content-center mb-4 g-2">
+            <div class="col-md-4">
+                <select id="categoryFilter" class="form-select shadow-sm">
+                    <option value="All">All Categories</option>
+                    <option value="Greetings">Greetings</option>
+                    <option value="People">People</option>
+                    <option value="Verbs">Verbs</option>
+                    <option value="Adjectives">Adjectives</option>
+                    <option value="Food">Food</option>
+                    <option value="Places">Places</option>
+                    <option value="Objects">Objects</option>
+                    <option value="Time">Time</option>
+                    <option value="Numbers">Numbers</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-success w-100 shadow-sm" data-bs-toggle="modal" data-bs-target="#addModal">
+                    <i class="fa-solid fa-plus"></i> Add Word
+                </button>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <div class="card-container mb-3" onclick="flipCard()">
+                    <div class="flashcard" id="card">
+                        <div class="front d-flex flex-column justify-content-center align-items-center p-4">
+                            <span class="badge bg-secondary mb-2" id="cardCategory">Category</span>
+                            <h2 class="display-3 fw-bold mb-3" id="koreanWord">안녕하세요</h2>
+                            <button class="btn btn-outline-primary btn-sm rounded-circle" onclick="speakKorean(event)">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <div class="back d-flex justify-content-center align-items-center p-4">
+                            <h3 class="fw-bold text-success" id="englishWord">Hello / Good day</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <button class="btn btn-outline-secondary px-3" onclick="prevCard()">
+                        <i class="fa-solid fa-arrow-left"></i> Prev
+                    </button>
+                    <button class="btn btn-warning px-3" onclick="shuffleCards()">
+                        <i class="fa-solid fa-shuffle"></i> Shuffle
+                    </button>
+                    <span class="fw-semibold text-muted" id="cardTracker">Card 1 of 100</span>
+                    <button class="btn btn-primary px-3" onclick="nextCard()">
+                        Next <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Flashcard</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCardForm">
+                        <div class="mb-3">
+                            <label class="form-label">Korean Word (Hangul)</label>
+                            <input type="text" id="inputKorean" class="form-control" required placeholder="e.g. 사랑">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">English Meaning</label>
+                            <input type="text" id="inputEnglish" class="form-control" required placeholder="e.g. Love">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select id="inputCategory" class="form-select">
+                                <option value="Greetings">Greetings</option>
+                                <option value="Verbs">Verbs</option>
+                                <option value="Adjectives">Adjectives</option>
+                                <option value="Food">Food</option>
+                                <option value="General">General</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Save Flashcard</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
